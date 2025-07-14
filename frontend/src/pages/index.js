@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 export default function Home() {
   const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
@@ -38,7 +37,7 @@ const handleCreate = async (e) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`  // ✅ include token!
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(newPost)
   });
@@ -51,19 +50,16 @@ const handleCreate = async (e) => {
   }
 };
 
-
-
   const handleDelete = async (id) => {
     const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${token}` // ✅ Add this line
+        'Authorization': `Bearer ${token}`
       }
     });
 
     if (res.ok) fetchPosts();
   };
-
 
   const startEditing = (post) => {
     setEditingId(post._id);
@@ -90,7 +86,7 @@ const handleCreate = async (e) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`  // ✅ Add this line
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(updatedPost)
     });
@@ -100,7 +96,6 @@ const handleCreate = async (e) => {
       fetchPosts();
     }
   };
-
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
@@ -112,10 +107,9 @@ const handleCreate = async (e) => {
     fetchPosts();
   }, []);
 
-
  return (
   <div className="min-h-screen bg-gray-50 p-6">
-    <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">📝 Blog CMS</h1>
+    <h1 className="text-3xl font-bold mb-6 text-center text-gray-900"> Blog CMS</h1>
 
     {token && (
       <div className="text-center mb-4">
@@ -163,7 +157,7 @@ const handleCreate = async (e) => {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('username', data.username);
               } else {
-                alert('✅ Registered! Now login.');
+                alert(' Registered! Now login.');
                 setAuthMode('login');
               }
               setFormPassword('');
